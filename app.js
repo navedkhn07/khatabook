@@ -8,9 +8,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
-app.get("/",(req, res)=>{
-    res.send("Honey❤️");
-})
+// app.get("/",(req, res)=>{
+//     res.send("Honey❤️");
+// })
 
 app.get('/home',(req, res)=>{
     fs.readdir(`./files`, function(err, files){
