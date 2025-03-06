@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 //     res.send("Honey❤️");
 // })
 
-app.get('/home',(req, res)=>{
+app.get('/',(req, res)=>{
     fs.readdir(`./files`, function(err, files){
     res.render('home',{files});
 
@@ -36,14 +36,14 @@ app.get('/edit/:filename',(req, res)=>{
 app.post('/update/:filename',(req, res)=>{
     fs.writeFile(`./files/${req.params.filename}`, req.body.filedata , function(err, data){
         if(err) return res.send(err);
-        res.redirect("/home")
+        res.redirect("/")
     })
 });
 
 app.get('/delete/:filename',(req, res)=>{
     fs.unlink(`./files/${req.params.filename}`, function(err, data){
         if(err) return res.send(err);
-        res.redirect("/home",);
+        res.redirect("/",);
     })
 });
 
@@ -54,7 +54,7 @@ app.get("/create", function(req,res){
 app.post('/create',(req, res)=>{
     fs.writeFile(`./files/${req.body.title}`, req.body.filedata, function(err){
         if(err) return res.status(500).send(err);
-        res.redirect("/home");
+        res.redirect("/");
     })
 });
 
@@ -73,7 +73,7 @@ app.post('/createByTime',(req, res)=>{
         if (err) {
             res.status(500).send(err);
         } else {
-            res.redirect("/home");
+            res.redirect("/");
         }
     });
 });
