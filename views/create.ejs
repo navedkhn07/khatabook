@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+</head>
+<body>
+    <div id="main" class="px-10 py-4 font-['Helvetica']">
+        <nav class="flex justify-between">
+          <div id="left">
+            <h2 class="bg-blue-600 py-1 px-1 rounded-md text-xl text-white">Khatabook</h2>
+          </div>
+          <div id="right" class="flex gap-5">
+            <a href="/home">Home</a>
+            <a href="/create">CreateNewHisaab by Name</a>
+          <a href="/createByTime">CreateNewHisaab by time</a>
+          </div>
+        </nav>
+        <div id="center" class="mt-10">
+          <h1 class="text-lg">Create New Hisaab</h1>
+          <form action="/create" method="post" class="flex flex-col w-[50%]">
+            <input type="text" placeholder="Shopping ka hisaab, ghar ka hisaab..." name="title" class="bg-gray-100 mt-5 p-2 ">
+            <textarea class=" bg-gray-100  mt-5 p-2 resize-none min-h-96" name="filedata" placeholder="Write Your Hisaab..."></textarea>
+            <!-- <input type="submit" class="py-2 px-5 bg-blue-600 text-white w-fit mt-5 rounded-md"> -->
+            <button class="py-2 px-5 bg-blue-600 text-white w-fit mt-5 rounded-md">Create Hisaab</button>
+          </form>
+        </div>
+      </div>
+</body>
+</html>
