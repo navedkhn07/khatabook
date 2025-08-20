@@ -46,7 +46,7 @@ A simple personal finance tracking application built with Node.js, Express, Mong
 
 3. **Environment Variables** (set these in Render dashboard):
    ```
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/khatabook?retryWrites=true&w=majority
+   MONGODB_URI=mongodb+srv://[username]:[password]@[cluster].mongodb.net/[database]?retryWrites=true&w=majority
    SESSION_SECRET=your-super-secret-random-string-here
    ```
 
@@ -60,6 +60,7 @@ A simple personal finance tracking application built with Node.js, Express, Mong
 - **Connection String**: Use the full connection string from MongoDB Atlas
 - **IP Whitelist**: Add `0.0.0.0/0` to MongoDB Atlas IP access list for testing
 - **Database Name**: The database will be created automatically when first accessed
+- **Security**: Never commit real MongoDB credentials to your repository
 
 ### Troubleshooting
 
@@ -69,6 +70,14 @@ If you get "Operation `users.findOne()` buffering timed out after 10000ms":
 2. Verify IP whitelist includes Render's servers
 3. Ensure your MongoDB Atlas cluster is running
 4. Check if your database user has proper permissions
+
+### Security Note
+
+⚠️ **Important**: The MongoDB connection string in this README is a template. Replace the placeholders with your actual MongoDB Atlas credentials:
+- `[username]` → Your MongoDB Atlas username
+- `[password]` → Your MongoDB Atlas password  
+- `[cluster]` → Your cluster name
+- `[database]` → Your database name (e.g., khatabook)
 
 ## Project Structure
 
