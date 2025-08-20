@@ -22,8 +22,6 @@ const mongooseOptions = {
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 30000, // 30 seconds
     socketTimeoutMS: 45000, // 45 seconds
-    bufferMaxEntries: 0,
-    bufferCommands: false,
     maxPoolSize: 10,
     minPoolSize: 1,
     maxIdleTimeMS: 30000,
