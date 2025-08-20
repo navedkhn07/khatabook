@@ -67,6 +67,17 @@ app.use((req, res, next) => {
     next();
 });
 
+// Health check endpoint for Render
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'OK',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        environment: process.env.NODE_ENV || 'development',
+        mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+    });
+});
+
 function ensureAuth(req, res, next) {
     if (!req.session.user) return res.redirect('/login');
     next();
@@ -76,7 +87,16 @@ function ensureAuth(req, res, next) {
 //     res.send("Honey❤️");
 // })
 
-app.get('/', ensureAuth, async (req, res) => {
+// Simple root endpoint for Render health check
+app.get('/', (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+    // If user is logged in, redirect to dashboard
+    res.redirect('/dashboard');
+});
+
+app.get('/dashboard', ensureAuth, async (req, res) => {
     try {
         // Check if MongoDB is connected
         if (mongoose.connection.readyState !== 1) {
@@ -219,6 +239,9 @@ app.post('/logout', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
+    console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🔗 MongoDB URI: ${MONGODB_URI ? 'Set' : 'Not set'}`);
+    console.log(`📊 MongoDB Status: ${mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'}`);
 });
