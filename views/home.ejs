@@ -10,41 +10,42 @@
       rel="stylesheet"
     />
   </head>
-  <body>
-    <div id="main" class="px-10 py-4">
-      <nav class="flex justify-between">
+  <body class="bg-slate-50 text-slate-800 min-h-screen">
+    <div id="main" class="px-4 sm:px-6 py-4 sm:py-6 max-w-5xl mx-auto">
+      <nav class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0 bg-white/80 backdrop-blur px-4 py-3 rounded-xl shadow-sm border border-slate-200">
         <div id="left">
           <h2 class="bg-blue-600 py-1 px-1 rounded-md text-xl text-white">Khatabook</h2>
         </div>
-        <div id="right" class="flex gap-5">
-          <a href="/">Home</a>
-          <a href="/create">CreateNewHisaab by Name</a>
-          <a href="/createByTime">CreateNewHisaab by time</a>
+        <div id="right" class="flex gap-3 md:gap-5 flex-wrap items-center">
+          <a href="/" class="text-slate-600 hover:text-blue-600 font-medium transition">Home</a>
+          <a href="/create" class="text-slate-600 hover:text-blue-600 font-medium transition">CreateNewHisaab by Name</a>
+          <a href="/createByTime" class="text-slate-600 hover:text-blue-600 font-medium transition">CreateNewHisaab by time</a>
+          <% if (currentUser) { %>
+            <form action="/logout" method="post"><button class="text-slate-600 hover:text-red-600 font-medium transition">Logout (<%= currentUser.name %>)</button></form>
+          <% } else { %>
+            <a href="/login" class="text-slate-600 hover:text-blue-600 font-medium transition">Login</a>
+          <% } %>
         </div>
       </nav>
-      <div id="center" class="mt-10">
-        <h1 class="text-lg">All Hisaab Kitaab</h1>
-        <% if(files.length > 0) { %>
-          <% files.forEach(function(file){ %>
+      <div id="center" class="mt-6 sm:mt-10">
+        <h1 class="text-2xl sm:text-3xl font-semibold">All Hisaab Kitaab</h1>
+        <% if(hisaabs.length > 0) { %>
+          <% hisaabs.forEach(function(doc){ %>
             <div
-            class="hisaab bg-blue-600 w-fit flex gap-40 px-2 py-2 rounded-md mt-5"
+            class="hisaab flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 bg-white rounded-xl border border-slate-200 shadow-sm px-4 py-3 mt-4 transition hover:shadow-md"
           >
-            <div id="left " class="flex gap-5">
-              <h1 class="text-white"><%= file.split(".")[0] %></h1>
-             <a href="/hisaab/<%= file %>"><i class="ri-arrow-right-line bg-white rounded-full px-1"></i></a>
+            <div id="left " class="flex items-center gap-3 flex-wrap">
+              <h1 class="text-slate-800 font-medium"><%= doc.title %></h1>
+             <a href="/hisaab/<%= doc._id %>"><i class="ri-arrow-right-line text-blue-600 text-lg transition-transform hover:translate-x-0.5"></i></a>
             </div>
-            <div id="right" class="flex justify-center items-center gap-3">
-              <a href="/edit/<%= file %>"><i class="ri-pencil-line text-white"></i></a>
-              <a href="/delete/<%= file %>"
-                ><i
-                  class="ri-delete-bin-line text-red-600 bg-white rounded-full text-lg px-1 py-1"
-                ></i
-              ></a>
+            <div id="right" class="flex justify-center items-center gap-2 sm:gap-3">
+              <a href="/edit/<%= doc._id %>"><i class="ri-pencil-line text-slate-500 hover:text-blue-600 transition"></i></a>
+              <a href="/delete/<%= doc._id %>"><i class="ri-delete-bin-line text-red-500 text-xl hover:scale-105 transition"></i></a>
             </div>
           </div>
           <% }) %>
           <% }  else { %>
-            <h1 class="text-1xl mt-5">No Hisaab is created till now...</h1>
+            <h1 class="text-xl mt-5 text-slate-500">No Hisaab is created till now...</h1>
          <%  } %>
       </div>
     </div>

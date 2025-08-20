@@ -10,23 +10,28 @@
     rel="stylesheet"
   />
 </head>
-<body>
-    <div id="main" class="px-10 py-4">
-        <nav class="flex justify-between">
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+    <div id="main" class="px-4 sm:px-6 py-4 sm:py-6 max-w-4xl mx-auto">
+        <nav class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0 bg-white/80 backdrop-blur px-4 py-3 rounded-xl shadow-sm border border-slate-200">
           <div id="left">
             <h2 class="bg-blue-600 py-1 px-1 rounded-md text-xl text-white">Khatabook</h2>
           </div>
-          <div id="right" class="flex gap-5">
-            <a href="/">Home</a>
-            <a href="/create">CreateNewHisaab by Name</a>
-          <a href="/createByTime">CreateNewHisaab by time</a>
+          <div id="right" class="flex gap-3 md:gap-5 flex-wrap items-center">
+            <a href="/" class="text-slate-600 hover:text-blue-600 font-medium transition">Home</a>
+            <a href="/create" class="text-slate-600 hover:text-blue-600 font-medium transition">CreateNewHisaab by Name</a>
+          <a href="/createByTime" class="text-slate-600 hover:text-blue-600 font-medium transition">CreateNewHisaab by time</a>
+          <% if (currentUser) { %>
+            <form action="/logout" method="post"><button class="text-slate-600 hover:text-red-600 font-medium transition">Logout (<%= currentUser.name %>)</button></form>
+          <% } else { %>
+            <a href="/login" class="text-slate-600 hover:text-blue-600 font-medium transition">Login</a>
+          <% } %>
           </div>
         </nav>
-        <div id="center" class="mt-10">
-          <h1 class="text-xl">hisaab of <span class="text-blue-600"><%= filename.split(".")[0] %></span></h1>
+        <div id="center" class="mt-6 sm:mt-10">
+          <h1 class="text-2xl sm:text-3xl font-semibold">hisaab of <span class="text-blue-600"><%= title %></span></h1>
           <!-- <p class=" text-lg mt-3 mb-5 p-2 bg-gray-400 w-fit"><%= data %></p> -->
-          <textarea class=" bg-gray-100  mt-5 mb-5 p-2 resize-none w-[50%] min-h-96"><%= data %></textarea> <br>
-          <a href="/edit/<%= filename %>" class=" rounded-md bg-blue-600 py-1 px-2" >Edit This hisaab</a>
+          <textarea class="bg-white mt-4 sm:mt-6 mb-4 sm:mb-6 p-3 resize-none w-full max-w-2xl min-h-80 sm:min-h-96 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 shadow-sm"><%= content %></textarea> <br>
+          <a href="/edit/<%= id %>" class="inline-flex items-center rounded-lg bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition" >Edit This hisaab</a>
         </div>
       </div>
 </body>

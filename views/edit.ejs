@@ -10,24 +10,29 @@
     rel="stylesheet"
   />
 </head>
-<body>
-    <div id="main" class="px-10 py-4">
-        <nav class="flex justify-between">
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+    <div id="main" class="px-4 sm:px-6 py-4 sm:py-6 max-w-4xl mx-auto">
+        <nav class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0 bg-white/80 backdrop-blur px-4 py-3 rounded-xl shadow-sm border border-slate-200">
           <div id="left">
             <h2 class="bg-blue-600 py-1 px-1 rounded-md text-xl text-white">Khatabook</h2>
           </div>
-          <div id="right" class="flex gap-5">
-            <a href="/">Home</a>
-            <a href="/create">CreateNewHisaab by Name</a>
-          <a href="/createByTime">CreateNewHisaab by time</a>
+          <div id="right" class="flex gap-3 md:gap-5 flex-wrap items-center">
+            <a href="/" class="text-slate-600 hover:text-blue-600 font-medium transition">Home</a>
+            <a href="/create" class="text-slate-600 hover:text-blue-600 font-medium transition">CreateNewHisaab by Name</a>
+          <a href="/createByTime" class="text-slate-600 hover:text-blue-600 font-medium transition">CreateNewHisaab by time</a>
+          <% if (currentUser) { %>
+            <form action="/logout" method="post"><button class="text-slate-600 hover:text-red-600 font-medium transition">Logout (<%= currentUser.name %>)</button></form>
+          <% } else { %>
+            <a href="/login" class="text-slate-600 hover:text-blue-600 font-medium transition">Login</a>
+          <% } %>
           </div>
         </nav>
-        <div id="center" class="mt-10">
-          <h1 class="text-lg">You're editing hisaab of <span class="text-blue-600"><%= filename.split(".")[0] %></span></h1>
-          <form action="/update/<%= filename %>" method="post" class="flex flex-col w-[50%]">
-            <input type="text" placeholder="Shopping ka hisaab, ghar ka hisaab..." name="title" class="bg-gray-100 mt-5 p-2 ">
-            <textarea class=" bg-gray-100 min-h-96 resize-none mt-5 p-2" name="filedata" placeholder="aata daal cheeni..."><%= data %></textarea>
-            <input type="submit" class="py-2 px-5 bg-blue-600 text-white w-fit mt-5 rounded-md">
+        <div id="center" class="mt-6 sm:mt-10">
+          <h1 class="text-2xl sm:text-3xl font-semibold">You're editing hisaab of <span class="text-blue-600"><%= title %></span></h1>
+          <form action="/update/<%= id %>" method="post" class="flex flex-col w-full max-w-2xl gap-3 sm:gap-4">
+            <input type="text" placeholder="Shopping ka hisaab, ghar ka hisaab..." name="title" class="bg-white mt-4 sm:mt-5 p-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 placeholder:text-slate-400">
+            <textarea class="bg-white min-h-80 sm:min-h-96 resize-none mt-4 sm:mt-5 p-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500" name="filedata" placeholder="aata daal cheeni..."><%= data %></textarea>
+            <input type="submit" class="py-2 px-5 bg-blue-600 text-white w-fit mt-4 sm:mt-5 rounded-lg hover:bg-blue-700 transition shadow-sm">
             <!-- <button class="py-2 px-5 bg-blue-600 text-white w-fit mt-5 rounded-md">Create Hisaab</button> -->
           </form>
         </div>
