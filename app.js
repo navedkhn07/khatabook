@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // MongoDB connection
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/khatabook';
@@ -237,9 +238,13 @@ app.post('/logout', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
-    console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`🔗 MongoDB URI: ${MONGODB_URI ? 'Set' : 'Not set'}`);
-    console.log(`📊 MongoDB Status: ${mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'}`);
-});
+if (process.env.VERCEL) {
+	module.exports = app;
+} else {
+	app.listen(PORT, '0.0.0.0', () => {
+		console.log(`🚀 Server is running on port ${PORT}`);
+		console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
+		console.log(`🔗 MongoDB URI: ${MONGODB_URI ? 'Set' : 'Not set'}`);
+		console.log(`📊 MongoDB Status: ${mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'}`);
+	});
+}
