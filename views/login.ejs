@@ -3,22 +3,77 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+	<script>
+	  tailwind = window.tailwind || {};
+	  tailwind.config = {
+	    theme: {
+	      extend: {
+	        fontFamily: {
+	          sans: ['Poppins', 'sans-serif']
+	        },
+	        boxShadow: {
+	          soft: '0 18px 45px -25px rgba(34, 197, 94, 0.35)'
+	        }
+	      }
+	    }
+	  };
+	</script>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<title>Login</title>
 	<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen">
-	<div class="px-6 py-6 max-w-md mx-auto">
-		<nav class="flex items-center justify-between bg-white/80 backdrop-blur px-4 py-3 rounded-xl shadow-sm border border-slate-200">
-			<h2 class="bg-blue-600 py-1 px-1 rounded-md text-xl text-white">Khatabook</h2>
-			<a href="/register" class="text-slate-600 hover:text-blue-600">Register</a>
-		</nav>
-		<h1 class="text-2xl font-semibold mt-10">Login</h1>
-		<form action="/login" method="post" class="flex flex-col gap-4 mt-6">
-			<input name="email" type="email" placeholder="Email" class="bg-white p-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500">
-			<input name="password" type="password" placeholder="Password" class="bg-white p-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500">
-			<button class="py-2 px-5 bg-blue-600 text-white w-fit rounded-lg hover:bg-blue-700 transition shadow-sm">Login</button>
-		</form>
+<body class="font-sans min-h-screen text-slate-800 bg-[radial-gradient(circle_at_top,_rgba(220,252,231,0.95),_transparent_34%),linear-gradient(180deg,_#f6fbf4_0%,_#eef8ec_100%)]">
+	<div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+	  <div class="absolute -top-20 -left-16 h-72 w-72 rounded-full bg-emerald-200/35 blur-3xl"></div>
+	  <div class="absolute top-28 right-0 h-80 w-80 rounded-full bg-lime-200/35 blur-3xl"></div>
+	</div>
+	<div class="mx-auto flex min-h-screen max-w-6xl items-center px-4 py-8 sm:px-6 lg:px-8">
+		<div class="grid w-full gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+			<section class="rounded-[32px] border border-white/70 bg-white/80 p-6 shadow-soft backdrop-blur-xl sm:p-8">
+				<div class="flex items-center gap-3">
+					<div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-lime-500 text-white shadow-lg shadow-emerald-500/25">
+						<i class="ri-wallet-3-fill text-xl"></i>
+					</div>
+					<div>
+						<p class="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-700/70">Khatabook</p>
+						<h1 class="text-xl font-bold text-slate-900">Hisab-Kitab</h1>
+					</div>
+				</div>
+				<h2 class="mt-8 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Welcome back</h2>
+				<p class="mt-4 max-w-md text-sm leading-6 text-slate-600 sm:text-base">Sign in to continue your warm, simple ledger workflow.</p>
+				<div class="mt-6 flex flex-wrap gap-3 text-sm text-slate-600">
+					<span class="rounded-full bg-emerald-50 px-4 py-2 text-emerald-700">Fast login</span>
+					<span class="rounded-full bg-white px-4 py-2 text-emerald-700 shadow-sm">Clean design</span>
+				</div>
+			</section>
+
+			<section class="rounded-[32px] border border-emerald-100 bg-gradient-to-br from-emerald-600 to-lime-500 p-6 text-white shadow-soft sm:p-8">
+				<div class="flex items-center justify-between">
+					<p class="text-sm font-medium text-white/85">Login to continue</p>
+					<div class="flex items-center gap-2">
+						<a href="/" class="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20">Home</a>
+						<a href="/register" class="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20">Register</a>
+					</div>
+				</div>
+				<form action="/login" method="post" class="mt-8 flex flex-col gap-4">
+					<div>
+						<label class="mb-2 block text-sm font-semibold text-white/90">Email</label>
+						<input name="email" type="email" placeholder="name@example.com" class="w-full rounded-2xl border border-white/15 bg-white/15 p-4 text-white placeholder:text-white/60 backdrop-blur focus:border-white/40 focus:outline-none focus:ring-4 focus:ring-white/15">
+					</div>
+					<div>
+						<label class="mb-2 block text-sm font-semibold text-white/90">Password</label>
+						<input name="password" type="password" placeholder="Your password" class="w-full rounded-2xl border border-white/15 bg-white/15 p-4 text-white placeholder:text-white/60 backdrop-blur focus:border-white/40 focus:outline-none focus:ring-4 focus:ring-white/15">
+					</div>
+					<button class="mt-2 inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-emerald-700 shadow-lg shadow-emerald-900/15 transition hover:bg-emerald-50">
+						<i class="ri-login-circle-line text-lg"></i>
+						Login
+					</button>
+				</form>
+			</section>
+		</div>
 	</div>
 </body>
 </html>

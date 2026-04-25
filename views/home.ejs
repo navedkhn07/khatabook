@@ -3,50 +3,153 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script>
+      tailwind = window.tailwind || {};
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif']
+            },
+            boxShadow: {
+              soft: '0 18px 45px -25px rgba(34, 197, 94, 0.35)'
+            }
+          }
+        }
+      };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <title>Khatabook | Dashboard</title>
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
   </head>
-  <body class="bg-slate-50 text-slate-800 min-h-screen">
-    <div id="main" class="px-4 sm:px-6 py-4 sm:py-6 max-w-5xl mx-auto">
-      <nav class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0 bg-white/80 backdrop-blur px-4 py-3 rounded-xl shadow-sm border border-slate-200">
-        <div id="left">
-          <h2 class="bg-blue-600 py-1 px-1 rounded-md text-xl text-white">Khatabook</h2>
-        </div>
-        <div id="right" class="flex gap-3 md:gap-5 flex-wrap items-center">
-          <a href="/" class="text-slate-600 hover:text-blue-600 font-medium transition">Home</a>
-          <a href="/create" class="text-slate-600 hover:text-blue-600 font-medium transition">CreateNewHisaab by Name</a>
-          <a href="/createByTime" class="text-slate-600 hover:text-blue-600 font-medium transition">CreateNewHisaab by time</a>
-          <% if (currentUser) { %>
-            <form action="/logout" method="post"><button class="text-slate-600 hover:text-red-600 font-medium transition">Logout (<%= currentUser.name %>)</button></form>
-          <% } else { %>
-            <a href="/login" class="text-slate-600 hover:text-blue-600 font-medium transition">Login</a>
-          <% } %>
-        </div>
-      </nav>
-      <div id="center" class="mt-6 sm:mt-10">
-        <h1 class="text-2xl sm:text-3xl font-semibold">All Hisaab Kitaab</h1>
-        <% if(hisaabs.length > 0) { %>
-          <% hisaabs.forEach(function(doc){ %>
-            <div
-            class="hisaab flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 bg-white rounded-xl border border-slate-200 shadow-sm px-4 py-3 mt-4 transition hover:shadow-md"
-          >
-            <div id="left " class="flex items-center gap-3 flex-wrap">
-              <h1 class="text-slate-800 font-medium"><%= doc.title %></h1>
-             <a href="/hisaab/<%= doc._id %>"><i class="ri-arrow-right-line text-blue-600 text-lg transition-transform hover:translate-x-0.5"></i></a>
+  <body class="font-sans min-h-screen text-slate-800 bg-[radial-gradient(circle_at_top,_rgba(220,252,231,0.95),_transparent_34%),linear-gradient(180deg,_#f6fbf4_0%,_#eef8ec_100%)]">
+    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div class="absolute -top-20 -left-16 h-72 w-72 rounded-full bg-emerald-200/35 blur-3xl"></div>
+      <div class="absolute top-28 right-0 h-80 w-80 rounded-full bg-lime-200/35 blur-3xl"></div>
+    </div>
+    <div id="main" class="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+      <nav class="rounded-[28px] border border-white/70 bg-white/85 px-5 py-4 shadow-soft backdrop-blur-xl">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-lime-500 text-white shadow-lg shadow-emerald-500/25">
+              <i class="ri-wallet-3-fill text-xl"></i>
             </div>
-            <div id="right" class="flex justify-center items-center gap-2 sm:gap-3">
-              <a href="/edit/<%= doc._id %>"><i class="ri-pencil-line text-slate-500 hover:text-blue-600 transition"></i></a>
-              <a href="/delete/<%= doc._id %>"><i class="ri-delete-bin-line text-red-500 text-xl hover:scale-105 transition"></i></a>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-700/70">Khatabook</p>
+              <h1 class="text-xl font-bold text-slate-900">Hisab-Kitab</h1>
             </div>
           </div>
-          <% }) %>
-          <% }  else { %>
-            <h1 class="text-xl mt-5 text-slate-500">No Hisaab is created till now...</h1>
-         <%  } %>
+          <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+            <a href="/" class="rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-emerald-500/25 transition hover:bg-emerald-700">Home</a>
+            <a href="/create" class="rounded-full border border-emerald-100 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-800 transition hover:border-emerald-200 hover:bg-emerald-100">New Hisaab</a>
+            <a href="/createByTime" class="rounded-full border border-emerald-100 bg-white px-4 py-2 text-sm font-semibold text-emerald-800 transition hover:border-emerald-200 hover:bg-emerald-50">Save With Date</a>
+            <% if (currentUser) { %>
+              <form action="/logout" method="post">
+                <button class="rounded-full border border-rose-100 bg-rose-50 px-4 py-2 text-sm font-semibold text-rose-700 transition hover:bg-rose-100">Logout (<%= currentUser.name %>)</button>
+              </form>
+            <% } else { %>
+              <a href="/login" class="rounded-full border border-emerald-100 bg-white px-4 py-2 text-sm font-semibold text-emerald-800 transition hover:border-emerald-200 hover:bg-emerald-50">Login</a>
+            <% } %>
+          </div>
+        </div>
+      </nav>
+
+      <section class="mt-6 grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+        <div class="rounded-[32px] border border-white/70 bg-white/80 p-6 shadow-soft backdrop-blur-xl sm:p-8">
+          <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+            Friendly account tracking for daily life
+          </div>
+          <h2 class="mt-5 max-w-2xl text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Track every bazaar, bill, and ghar ka hisaab in one calm place.</h2>
+          <p class="mt-4 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">A clean ledger view for shopping notes, household expenses, and quick records that feel easy to maintain on mobile.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="/create" class="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700">
+              <i class="ri-add-line text-lg"></i>
+              Create Hisaab
+            </a>
+            <a href="/createByTime" class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-5 py-3 text-sm font-semibold text-emerald-800 transition hover:bg-emerald-50">
+              <i class="ri-time-line text-lg"></i>
+              Save With Date
+            </a>
+          </div>
+        </div>
+        <div class="rounded-[32px] border border-emerald-100 bg-gradient-to-br from-emerald-600 to-lime-500 p-6 text-white shadow-soft sm:p-8">
+          <div class="flex items-center justify-between">
+            <p class="text-sm font-medium text-white/85">Your ledger</p>
+            <i class="ri-book-2-fill text-2xl text-white/90"></i>
+          </div>
+          <div class="mt-6 grid grid-cols-2 gap-4">
+            <div class="rounded-3xl bg-white/12 p-4 backdrop-blur">
+              <p class="text-xs uppercase tracking-[0.2em] text-white/70">Status</p>
+              <p class="mt-2 text-2xl font-bold"><%= hisaabs.length %></p>
+              <p class="mt-1 text-sm text-white/80">Saved notes</p>
+            </div>
+            <div class="rounded-3xl bg-white/12 p-4 backdrop-blur">
+              <p class="text-xs uppercase tracking-[0.2em] text-white/70">Mood</p>
+              <p class="mt-2 text-2xl font-bold">Simple</p>
+              <p class="mt-1 text-sm text-white/80">Fast to use</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="center" class="mt-8 sm:mt-10">
+        <div class="mb-4 flex items-end justify-between gap-3">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-700/70">All records</p>
+            <h3 class="mt-1 text-2xl font-bold text-slate-900 sm:text-3xl">Your Hisab Kitaab</h3>
+          </div>
+        </div>
+        <% if(hisaabs.length > 0) { %>
+          <div class="space-y-4">
+            <% hisaabs.forEach(function(doc){ %>
+              <% const displayTitle = (doc.title || '').replace(/\.txt$/i, ''); %>
+              <article class="group rounded-[28px] border border-white/70 bg-white/90 p-4 shadow-soft transition hover:-translate-y-0.5 hover:shadow-xl sm:p-5">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div class="flex items-start gap-4">
+                    <div class="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700 transition group-hover:bg-emerald-100">
+                      <i class="ri-file-text-line text-xl"></i>
+                    </div>
+                    <div>
+                      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-600">Ledger entry</p>
+                      <h4 class="mt-1 text-lg font-semibold text-slate-900"><%= displayTitle %></h4>
+                      <p class="mt-1 text-sm text-slate-500">Tap to open, edit, or delete this note.</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 self-start sm:self-center">
+                    <a href="/hisaab/<%= doc._id %>" class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-emerald-100 bg-emerald-50 text-emerald-700 transition hover:bg-emerald-100" aria-label="Open <%= displayTitle %>">
+                      <i class="ri-arrow-right-up-line text-lg"></i>
+                    </a>
+                    <a href="/edit/<%= doc._id %>" class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-600 transition hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700" aria-label="Edit <%= displayTitle %>">
+                      <i class="ri-pencil-line text-lg"></i>
+                    </a>
+                    <a href="/delete/<%= doc._id %>" class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-rose-100 bg-rose-50 text-rose-600 transition hover:bg-rose-100" aria-label="Delete <%= displayTitle %>">
+                      <i class="ri-delete-bin-line text-lg"></i>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            <% }) %>
+          </div>
+        <% }  else { %>
+          <div class="rounded-[32px] border border-dashed border-emerald-200 bg-white/80 px-6 py-12 text-center shadow-soft">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-3xl bg-emerald-50 text-emerald-700">
+              <i class="ri-notification-4-line text-3xl"></i>
+            </div>
+            <h4 class="mt-5 text-xl font-semibold text-slate-900">No Hisaab yet</h4>
+            <p class="mt-2 text-sm text-slate-500">Create your first note to start tracking purchases, dues, or household expenses.</p>
+            <a href="/create" class="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-emerald-500/25 transition hover:bg-emerald-700">
+              <i class="ri-add-line text-lg"></i>
+              Add First Hisaab
+            </a>
+          </div>
+        <%  } %>
       </div>
     </div>
   </body>

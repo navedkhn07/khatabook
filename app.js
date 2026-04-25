@@ -92,7 +92,7 @@ function ensureAuth(req, res, next) {
 // Simple root endpoint for Render health check
 app.get('/', (req, res) => {
 	if (!req.session.user) {
-		return res.redirect('/login');
+		return res.render('landing');
 	}
 	// If user is logged in, redirect to dashboard
 	res.redirect('/dashboard');
@@ -181,7 +181,7 @@ app.post('/createByTime', ensureAuth, async (req, res) => {
 	const year = currentDate.getFullYear();
 	const formattedDate = `${day}-${month}-${year}`;
 	try {
-		await Hisaab.create({ title: `${formattedDate}.txt`, content: req.body.filedata || '', user: req.session.user._id });
+		await Hisaab.create({ title: formattedDate, content: req.body.filedata || '', user: req.session.user._id });
 		res.redirect('/');
 	} catch (err) {
 		res.status(500).send(err.message);

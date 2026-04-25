@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind = window.tailwind || {};
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif']
+          },
+          boxShadow: {
+            soft: '0 18px 45px -25px rgba(34, 197, 94, 0.35)'
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Khatabook | Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+<body class="font-sans min-h-screen text-slate-800 bg-[radial-gradient(circle_at_top,_rgba(220,252,231,0.95),_transparent_34%),linear-gradient(180deg,_#f6fbf4_0%,_#eef8ec_100%)]">
+  <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute -top-20 -left-16 h-72 w-72 rounded-full bg-emerald-200/35 blur-3xl"></div>
+    <div class="absolute top-28 right-0 h-80 w-80 rounded-full bg-lime-200/35 blur-3xl"></div>
+  </div>
+
+  <div class="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+    <nav class="rounded-[28px] border border-white/70 bg-white/85 px-5 py-4 shadow-soft backdrop-blur-xl">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div class="flex items-center gap-3">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-lime-500 text-white shadow-lg shadow-emerald-500/25">
+            <i class="ri-wallet-3-fill text-xl"></i>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-700/70">Khatabook</p>
+            <h1 class="text-xl font-bold text-slate-900">Hisab-Kitab</h1>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+          <a href="/login" class="rounded-full border border-emerald-100 bg-white px-4 py-2 text-sm font-semibold text-emerald-800 transition hover:border-emerald-200 hover:bg-emerald-50">Login</a>
+          <a href="/register" class="rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-emerald-500/25 transition hover:bg-emerald-700">Register</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="mt-6 grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+      <div class="rounded-[32px] border border-white/70 bg-white/80 p-6 shadow-soft backdrop-blur-xl sm:p-8">
+        <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700">
+          <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+          Simple ledger for daily life
+        </div>
+        <h2 class="mt-5 max-w-2xl text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">Keep your udhaar, bazaar, and ghar ka hisaab in one friendly place.</h2>
+        <p class="mt-4 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">Khatabook helps you save shopping notes, household expenses, and quick reminders with a warm, easy-to-use layout made for Indian users.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/register" class="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700">
+            <i class="ri-user-add-line text-lg"></i>
+            Create Account
+          </a>
+          <a href="/login" class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-5 py-3 text-sm font-semibold text-emerald-800 transition hover:bg-emerald-50">
+            <i class="ri-login-circle-line text-lg"></i>
+            Login
+          </a>
+        </div>
+      </div>
+
+      <div class="rounded-[32px] border border-emerald-100 bg-gradient-to-br from-emerald-600 to-lime-500 p-6 text-white shadow-soft sm:p-8">
+        <div class="flex items-center justify-between">
+          <p class="text-sm font-medium text-white/85">Why people use it</p>
+          <i class="ri-book-2-fill text-2xl text-white/90"></i>
+        </div>
+        <div class="mt-6 grid gap-4">
+          <div class="rounded-3xl bg-white/12 p-4 backdrop-blur">
+            <p class="text-xs uppercase tracking-[0.2em] text-white/70">Fast</p>
+            <p class="mt-2 text-lg font-semibold">Add notes in seconds</p>
+          </div>
+          <div class="rounded-3xl bg-white/12 p-4 backdrop-blur">
+            <p class="text-xs uppercase tracking-[0.2em] text-white/70">Clear</p>
+            <p class="mt-2 text-lg font-semibold">See every hisaab neatly</p>
+          </div>
+          <div class="rounded-3xl bg-white/12 p-4 backdrop-blur">
+            <p class="text-xs uppercase tracking-[0.2em] text-white/70">Friendly</p>
+            <p class="mt-2 text-lg font-semibold">Made for daily Indian use</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-6 rounded-[32px] border border-white/70 bg-white/85 p-6 shadow-soft backdrop-blur-xl sm:p-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-700/70">Get started</p>
+          <h3 class="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl">Login or register to start saving your hisaab.</h3>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="/login" class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-5 py-3 text-sm font-semibold text-emerald-800 transition hover:bg-emerald-50">
+            <i class="ri-login-circle-line text-lg"></i>
+            Login
+          </a>
+          <a href="/register" class="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-700">
+            <i class="ri-user-add-line text-lg"></i>
+            Register
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
